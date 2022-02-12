@@ -1,16 +1,49 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import psycopg2
+#import SQLAlchemy
+from pprint import pprint
+import json
 
 
-# Press the green button in the gutter to run the script.
+class Table:
+
+    def __init__(self, qantity_colon):
+        self.qantity_colon = qantity_colon
+
+    def eat(self, qantity_colon):
+        marker = input ('хотите ввести элемент таблицы y or n ?')
+        while True:
+           if marker == 'y':
+               curent
+        # try:
+        #         rices.append(a)
+        #         a = int(input('-->> '))
+        #     except:
+        #         break
+
+        if self.energy < 100:
+            self.energy += food
+        else:
+            print('Not hungry')
+
+
+peter = Character('Peter Parker', 80)
+
+# A = input().split(',')
+
+# while True:
+#     try:
+#         rices.append(a)
+#         a = int(input('-->> '))
+#     except:
+#         break
+
+
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    a = input().split(',')
+    b = tuple(a)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    print(b)
+
+
