@@ -1,7 +1,7 @@
 import psycopg2
 import sqlalchemy
 from pprint import pprint
-import json
+#import json
 
 
 def change_str_to_int(any_list, namber_member):
@@ -52,7 +52,21 @@ if __name__ == '__main__':
     print("Сейчас вы будете вводить лист жанров ")
     geners = get_tuple_for_bd()
     pprint(geners)
-    connection.executemany('''INSERT INTO list_of_gener VALUES (?,?)''', geners)
+    for str_tabl in geners:
+        ins = insert(list_of_gener)
+        r = connection.execute(ins,
+              id = str_tabl[0],
+             name_gener = str_tabl[1],
+             )
 
+
+
+        # connection.execute(f"""
+        # INSERT INTO list_of_gener VELUES{str_tabl};
+        # """)
+# connection.executemany('''INSERT INTO list_of_gener VALUES (?,?)''', geners)
+
+
+#connection.execute("""INSERT INTO inventory VELUES(999, 999, 999);""")
 # connection.execute("""INSERT INTO rental(rental_date, inventory_id, customer_id, staff_id)
 #            VALUES(NOW(), 1, 3, 2);
