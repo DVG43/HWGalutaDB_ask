@@ -59,7 +59,7 @@ print(name_executor_1_world)
 # название треков, которые содержат слово "мой"/"my".
 name_executor_1_world = connection.execute("""
 SELECT name_trek FROM list_of_trek
-WHERE name_trek 
+WHERE name_trek
 LIKE '%%мой%%' OR '%%my%%';
 """).fetchall()
 print('name trek with"мой"/"my"')
@@ -81,3 +81,4 @@ sel_b = connection.execute("""
 SELECT max(id) FROM list_of_executor_new;
 """).fetchall()
 print(sel_b)
+

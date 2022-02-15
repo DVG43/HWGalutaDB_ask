@@ -48,25 +48,95 @@ if __name__ == '__main__':
     db = 'postgresql://py48galuta:1624@localhost:5432/galutadb'
     engine = sqlalchemy.create_engine(db)
     connection = engine.connect()
-    # cursor = connection.cursor()
     print("Сейчас вы будете вводить лист жанров ")
     geners = get_tuple_for_bd()
     pprint(geners)
     for str_tabl in geners:
-        ins = insert(list_of_gener)
-        r = connection.execute(ins,
-              id = str_tabl[0],
-             name_gener = str_tabl[1],
-             )
+        connection.execute(f"""
+        INSERT INTO list_of_gener(id,name_gener)VALUES{str_tabl};
+        """)
+
+    # не    менее    8    исполнителей
+    print("""Сейчас вы будете вводить лист исполнителей 
+    id,name_executor,date_of_birth""")
+    executors = get_tuple_for_bd()
+    pprint(executors)
+    for str_tabl_a in executors:
+        connection.execute(f"""
+        INSERT INTO list_of_executor(id_geners,name_executor,date_of_birth)
+        VALUES{str_tabl_a};
+        """)
+
+    # не менее 8 альбомов;
+    print("""Сейчас вы будете вводить лист альбомовй 
+    id,name_albom,release_year,id_executor""")
+    alboms = get_tuple_for_bd()
+    pprint(alboms)
+    for str_tabl_b in alboms:
+        connection.execute(f"""
+        INSERT INTO list_of_albom(id,name_albom,release_year,id_executor)
+        VALUES{str_tabl_b};
+        """)
 
 
+    # не менее 15 треков;
+    print("""С""ейчас вы будете вводить лист треков 
+    id,name_trek,duration_min,id_albom""")
+    treks = get_tuple_for_bd()
+    pprint(treks)
+    for str_tabl_c in treks:
+        connection.execute(f"""
+        INSERT INTO list_of_trek(id,name_trek,duration_min,id_albom)
+        VALUES{str_tabl_c};
+        """)
 
-        # connection.execute(f"""
-        # INSERT INTO list_of_gener VELUES{str_tabl};
-        # """)
-# connection.executemany('''INSERT INTO list_of_gener VALUES (?,?)''', geners)
+
+    # не менее 8 сборников.
+    print("""Сейчас вы будете вводить лист сборников 
+    id,name_colection,release_year """)
+    colections = get_tuple_for_bd()
+    pprint(colections)
+    for str_tabl_d in colections:
+        connection.execute(f"""
+         INSERT INTO list_of_colection(id,name_colection,release_year)
+         VALUES{str_tabl_d};
+         """)
+
+    # связь исполнителей и жанров.
+    print("""Сейчас вы будете вводить лист связи исполнителей и жанров
+    id_geners,id_executor """)
+    exec_gener = get_tuple_for_bd()
+    pprint(exec_gener)
+    for str_tabl_e in exec_gener:
+        connection.execute(f"""
+         INSERT INTO list_executors_and_geners(id_geners,id_executor)
+         VALUES{str_tabl_e};
+         """)
+
+    # связь альбомов и исполнителей.
+    print("""Сейчас вы будете вводить лист связи альбомов и исполнителей 
+    id_albom,id_executor """)
+    exec_alb = get_tuple_for_bd()
+    pprint(exec_alb)
+    for str_tabl_g in exec_alb:
+        connection.execute(f"""
+         INSERT INTO list_executors_and_albom(id_albom,id_executor)
+         VALUES{str_tabl_g};
+         """)
 
 
-#connection.execute("""INSERT INTO inventory VELUES(999, 999, 999);""")
-# connection.execute("""INSERT INTO rental(rental_date, inventory_id, customer_id, staff_id)
-#            VALUES(NOW(), 1, 3, 2);
+    # связь треков и колекций.
+    print("""Сейчас вы будете вводить лист связи треков и колекций 
+    id_treck,id_colection """)
+    trek_col = get_tuple_for_bd()
+    pprint(trek_col)
+    for str_tabl_i in trek_col:
+        connection.execute(f"""
+         INSERT INTO list_treck_and_colection(id_treck,id_colection)
+         VALUES{str_tabl_i};
+         """)
+
+
+# Внимание! Должны быть заполнены все поля каждой таблицы, в т.ч. таблицы связей
+# (исполнителей с жанрами, исполнителей с альбомами, сборников с треками).
+
