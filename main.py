@@ -57,18 +57,18 @@ if __name__ == '__main__':
         """)
 
     # не    менее    8    исполнителей
-    print("""Сейчас вы будете вводить лист исполнителей 
+    print("""Сейчас вы будете вводить лист исполнителей
     id,name_executor,date_of_birth""")
     executors = get_tuple_for_bd()
     pprint(executors)
     for str_tabl_a in executors:
         connection.execute(f"""
-        INSERT INTO list_of_executor(id_geners,name_executor,date_of_birth)
+        INSERT INTO list_of_executor(id,name_executor,date_of_birth)
         VALUES{str_tabl_a};
         """)
 
     # не менее 8 альбомов;
-    print("""Сейчас вы будете вводить лист альбомовй 
+    print("""Сейчас вы будете вводить лист альбомовй
     id,name_albom,release_year,id_executor""")
     alboms = get_tuple_for_bd()
     pprint(alboms)
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
 
     # не менее 15 треков;
-    print("""С""ейчас вы будете вводить лист треков 
+    print("""С""ейчас вы будете вводить лист треков
     id,name_trek,duration_min,id_albom""")
     treks = get_tuple_for_bd()
     pprint(treks)
@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
 
     # не менее 8 сборников.
-    print("""Сейчас вы будете вводить лист сборников 
+    print("""Сейчас вы будете вводить лист сборников
     id,name_colection,release_year """)
     colections = get_tuple_for_bd()
     pprint(colections)
@@ -101,6 +101,7 @@ if __name__ == '__main__':
          INSERT INTO list_of_colection(id,name_colection,release_year)
          VALUES{str_tabl_d};
          """)
+
 
     # связь исполнителей и жанров.
     print("""Сейчас вы будете вводить лист связи исполнителей и жанров
@@ -114,7 +115,7 @@ if __name__ == '__main__':
          """)
 
     # связь альбомов и исполнителей.
-    print("""Сейчас вы будете вводить лист связи альбомов и исполнителей 
+    print("""Сейчас вы будете вводить лист связи альбомов и исполнителей
     id_albom,id_executor """)
     exec_alb = get_tuple_for_bd()
     pprint(exec_alb)
@@ -126,7 +127,7 @@ if __name__ == '__main__':
 
 
     # связь треков и колекций.
-    print("""Сейчас вы будете вводить лист связи треков и колекций 
+    print("""Сейчас вы будете вводить лист связи треков и колекций
     id_treck,id_colection """)
     trek_col = get_tuple_for_bd()
     pprint(trek_col)
