@@ -46,23 +46,22 @@ print(colection_18_20)
 
 
 # исполнители, чье имя состоит из 1 слова;
-# name_executor_1_world = connection.execute("""
-# SELECT name_executor FROM list_of_executor
-# WHERE name_executor NOT
-# LIKE "%%""%%" OR "%%""%%""%%";
-# """).fetchall()
-# print('name only one world')
-# print(name_executor_1_world)
+name_executor_1_world = connection.execute("""
+SELECT name_executor FROM list_of_executor
+WHERE name_executor NOT LIKE '%% %%';
+""").fetchall()
+print('name only one world')
+print(name_executor_1_world)
 
 
-# название треков, которые содержат слово "мой"/"my".
-# name_executor_1_world = connection.execute("""
-# SELECT name_trek FROM list_of_trek
-# WHERE name_trek
-# LIKE '%%мой%%' OR '%%my%%';
-# """).fetchall()
-# print('name trek with"мой"/"my"')
-# print(name_executor_1_world)
+#название треков, которые содержат слово "мой"/"my".
+name_executor_1_world = connection.execute("""
+SELECT name_trek FROM list_of_trek
+WHERE name_trek
+LIKE '%%мой%%' OR name_trek LIKE'%%my%%';
+""").fetchall()
+print('name trek with"мой"/"my"')
+print(name_executor_1_world)
 
 
 
