@@ -6,43 +6,51 @@ db = 'postgresql://py48galuta:1624@localhost:5432/galutadb'
 engine = sqlalchemy.create_engine(db)
 connection = engine.connect()
 
-# количество исполнителей в каждом жанре;
-qwontat_exec_in_gener = connection.execute("""
-SELECT COUNT(id),name_gener FROM list_of_gener lg
-JOIN list_executors_and_geners leg ON lg.id = leg.id_geners
-GROUP BY id;
-""").fetchall()
-print ('(n исполнителей, жанр)')
-print(qwontat_exec_in_gener)
-
-# количество исполнителей в каждом жанре;
-# фильмы, которые берут в прокат чаще всего
-# con.execute("""
-# SELECT id,name_gener COUNT(r.inventory_id) count FROM film f
-# JOIN inventory i ON f.film_id = i.film_id
-# JOIN rental r ON i.inventory_id = r.inventory_id
-# GROUP BY f.title
-# ORDER BY count DESC;
+# # количество исполнителей в каждом жанре;
+# qwontat_exec_in_gener = connection.execute("""
+# SELECT COUNT(id),name_gener FROM list_of_gener lg
+# JOIN list_executors_and_geners leg ON lg.id = leg.id_geners
+# GROUP BY id;
 # """).fetchall()
+# print ('(n исполнителей, жанр)')
+# print(qwontat_exec_in_gener)
 #
 #
-# con.execute("""
-# SELECT store_id, city, country FROM store s
-# JOIN address a ON s.address_id = a.address_id
-# JOIN city ON a.city_id = city.city_id
-# JOIN country c ON city.country_id = c.country_id;
+# # количество треков, вошедших в альбомы 2002-2008 годов;
+# qwontat_trek_in_albom = connection.execute("""
+# SELECT  name_trek, id_albom FROM list_of_trek lt
+# FULL OUTER JOIN list_of_albom lal ON lt.id_albom = lal.id
+# WHERE release_year BETWEEN 2002 AND 2008;
 # """).fetchall()
-
-# количество треков, вошедших в альбомы 2019-2020 годов;
-
-
-# средняя продолжительность треков по каждому альбому;
-
+# print ('количество треков с 2002 по 2008')
+# print(len(qwontat_trek_in_albom))
+#
+#
+# # средняя продолжительность треков по каждому альбому;
+# avereg_duration_in_albom = connection.execute("""
+# SELECT  name_albom, AVG(duration_min) FROM list_of_trek lt
+# FULL OUTER JOIN list_of_albom lal ON lt.id_albom = lal.id
+# GROUP BY  name_albom;
+# """).fetchall()
+# print ('средняя продолжительность треков по альбомам')
+# pprint (avereg_duration_in_albom)
 
 # все исполнители, которые не выпустили альбомы в 2020 году;
 
 
-# названия сборников, в которых присутствует конкретный исполнитель (выберите сами);
+# названия сборников, в которых присутствует конкретный исполнитель (vasia petrov);
+avereg_duration_in_albom = connection.execute("""
+SELECT  name_colection  FROM list_of_colection lc
+JOIN list_treck_and_colection ltc ON lc.id = ltc.id_colection
+JOIN list_of_trek lt ON ltc.id_treck = lt.id
+JOIN list_of_albom lal ON lt.id_albom = lal.id
+JOIN list_executors_and_albom leal ON lal.id = leal.id_albom
+JOIN list_of_executor le ON leal.id_executor = le.id
+WHERE name_executor = 'vasia petrov';
+""").fetchall()
+print ('названия сборников, в которых присутствует vasia petrov')
+pprint (avereg_duration_in_albom)
+
 
 
 # название альбомов, в которых присутствуют исполнители более 1 жанра;
