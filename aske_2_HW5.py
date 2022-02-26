@@ -72,6 +72,16 @@ pprint (name_albom_with_exekt_muligener)
 
 
 # исполнителя(-ей), написавшего самый короткий по продолжительности трек (теоретически таких треков может быть несколько);
-#групировка по минималке
+
+shotest_trek = connection.execute("""
+SELECT  name_executor, duration_min  FROM list_of_trek lt
+JOIN list_of_albom lofal ON lt.id_albom = lofal.id
+JOIN list_of_executor le2 ON lofal.id_executor = le2.id
+    WHERE duration_min = (
+        SELECT MIN(duration_min)FROM list_of_trek);
+""").fetchall()
+print ('исполнитель который написал самый короткий трек')
+pprint (shotest_trek)
+
 
 # название альбомов, содержащих наименьшее количество треков
