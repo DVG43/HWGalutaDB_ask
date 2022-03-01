@@ -35,7 +35,7 @@ GROUP BY  name_albom;
 print ('средняя продолжительность треков по альбомам')
 pprint (avereg_duration_in_albom)
 
-# все исполнители, которые не выпустили альбомы в 2020 году; НЕ работает.
+# все исполнители, которые не выпустили альбомы в 2020 году; НЕ работает.  недопилил
 executor_without_albom_2020 = connection.execute("""
 SELECT name_executor FROM list_of_executor lex
 JOIN list_of_albom loa ON lex.id = loa.id_executor
@@ -47,21 +47,21 @@ pprint (executor_without_albom_2020)
 
 
 # названия сборников, в которых присутствует конкретный исполнитель (vasia petrov);Запрос  работает.
-# avereg_duration_in_albom = connection.execute("""
-# SELECT  name_colection  FROM list_of_colection lc
-# JOIN list_treck_and_colection ltc ON lc.id = ltc.id_colection
-# JOIN list_of_trek lt ON ltc.id_treck = lt.id
-# JOIN list_of_albom lal ON lt.id_albom = lal.id
-# JOIN list_executors_and_albom leal ON lal.id = leal.id_albom
-# JOIN list_of_executor le ON leal.id_executor = le.id
-# WHERE name_executor = 'vasia petrov';
-# """).fetchall()
-# print ('названия сборников, в которых присутствует vasia petrov')
-# pprint (avereg_duration_in_albom)
+avereg_duration_in_albom = connection.execute("""
+SELECT  name_colection  FROM list_of_colection lc
+JOIN list_treck_and_colection ltc ON lc.id = ltc.id_colection
+JOIN list_of_trek lt ON ltc.id_treck = lt.id
+JOIN list_of_albom lal ON lt.id_albom = lal.id
+JOIN list_executors_and_albom leal ON lal.id = leal.id_albom
+JOIN list_of_executor le ON leal.id_executor = le.id
+WHERE name_executor = 'vasia petrov';
+""").fetchall()
+print ('названия сборников, в которых присутствует vasia petrov')
+pprint (avereg_duration_in_albom)
 
 
 
-# название альбомов, в которых присутствуют исполнители более 1 жанра;НЕ работает.
+# название альбомов, в которых присутствуют исполнители более 1 жанра;НЕ работает. нет понимания алгоритма
 name_albom_with_exekt_muligener = connection.execute("""
 SELECT name_albom FROM list_of_albom lal
 JOIN list_executors_and_albom lea ON lal.id = lea.id_albom
@@ -76,8 +76,8 @@ pprint (name_albom_with_exekt_muligener)
 
 # HAVING COUNT (id_geners) >=2
 
-# наименование треков, которые не входят в сборники; сделать список сборник_трек,
-# потом пройти по нему циклом и по результату NULL выявить интересный нам.
+# наименование треков, которые не входят в сборники; сделать список сборник_трек, нет понимания алгоритма
+
 
 
 # исполнителя(-ей), написавшего самый короткий по продолжительности трек (теоретически таких треков может быть несколько);Запрос  работает.
@@ -93,4 +93,4 @@ print ('исполнитель который написал самый коро
 pprint (shotest_trek)
 
 
-# название альбомов, содержащих наименьшее количество треков
+# название альбомов, содержащих наименьшее количество треков нет понимания алгоритма
